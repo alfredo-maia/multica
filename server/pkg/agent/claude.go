@@ -1513,6 +1513,7 @@ func writeMcpConfigToTemp(raw json.RawMessage) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("create mcp config temp dir: %w", err)
 	}
+	raw = ensureMcpServerTypeFields(raw)
 	data, err := hardenBrowserMcpConfig(raw, dir)
 	if err != nil {
 		cleanupMcpConfigTemp(filepath.Join(dir, "mcp-config.json"))
